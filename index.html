@@ -50,12 +50,21 @@
 			margin-top: 50px;
 			width: 200px;
 		}
+
+		#score {
+			color: #000;
+			font-size: 1.5rem;
+			margin-top: 30px;
+		}
 	</style>
 </head>
 <body>
 	<img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/FC_Shakhtar_Donetsk_logo.svg/1200px-FC_Shakhtar_Donetsk_logo.svg.png" alt="Шахтар">
 
 	<h1>Камінь, ножиці, папір</h1>
+
+	<p>Рахунок: </p>
+	<p id="score">Комп'ютер 0 : 0 Гравець</p>
 
 	<p>Оберіть свій варіант:</p>
 
@@ -66,6 +75,9 @@
 	<p id="result"></p>
 
 	<script>
+		var computerScore = 0;
+		var playerScore = 0;
+
 		function play(playerChoice) {
 			var choices = ["камінь", "ножиці", "папір"];
 			var computerChoice = choices[Math.floor(Math.random()*choices.length)];
@@ -77,12 +89,14 @@
 				(playerChoice == "ножиці" && computerChoice == "папір") ||
 				(playerChoice == "папір" && computerChoice == "камінь")
 			) {
-				result = "Ви виграли!";
-			} else {
-				result = "Комп'ютер виграв!";
-			}
-			document.getElementById("result").innerHTML = "Ви обрали " + playerChoice + ". Комп'ютер обрав " + computerChoice + ". " + result;
+			
+                result = "Гравець переміг!";
+			playerScore++;
+		} else {
+			result = "Комп'ютер переміг!";
+			computerScore++;
 		}
-	</script>
-</body>
-</html>
+		document.getElementById("result").innerHTML = "Ви обрали " + playerChoice + ", комп'ютер обрав " + computerChoice + ". " + result;
+		document.getElementById("score").innerHTML = "Комп'ютер " + computerScore + " : " + playerScore + " Гравець";
+	}
+</script>
