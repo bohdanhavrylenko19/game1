@@ -4,99 +4,197 @@
 	<title>Камінь, ножиці, папір</title>
 	<style>
 		body {
-			background-color: #FFDD00;
 			font-family: Arial, sans-serif;
+			background-color: #F8D347;
 			margin: 0;
 			padding: 0;
-			text-align: center;
 		}
 
 		h1 {
-			color: #000;
-			font-size: 3rem;
+			text-align: center;
 			margin-top: 50px;
-			text-transform: uppercase;
+			color: #FFFFFF;
+			font-size: 48px;
 		}
 
-		p {
-			color: #000;
-			font-size: 1.5rem;
-			margin-top: 30px;
+		#game {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin-top: 50px;
 		}
 
-		button {
-			background-color: #E50000;
-			border: none;
-			border-radius: 5px;
-			color: #fff;
-			cursor: pointer;
-			font-size: 1.2rem;
+		#player {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		#computer {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.scoreboard {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.score {
+			color: #FFFFFF;
+			font-size: 36px;
+			font-weight: bold;
 			margin-top: 20px;
-			padding: 10px 20px;
-			text-transform: uppercase;
 		}
 
-		button:hover {
-			background-color: #B30000;
+		#choices {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			margin-top: 50px;
+		}
+
+		.choice {
+			background-color: #FFFFFF;
+			border: 2px solid #000000;
+			border-radius: 50%;
+			width: 100px;
+			height: 100px;
+			margin: 0 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			font-weight: bold;
+			color: #000000;
+			text-transform: uppercase;
+			cursor: pointer;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.choice:hover {
+			transform: scale(1.1);
+			background-color: #CCCCCC;
 		}
 
 		#result {
-			color: #000;
-			font-size: 1.5rem;
-			margin-top: 30px;
-		}
-
-		#logo {
+			text-align: center;
 			margin-top: 50px;
-			width: 200px;
+			font-size: 36px;
+			font-weight: bold;
+			color: #FFFFFF;
+			text-shadow: 2px 2px #000000;
 		}
 
-		#score {
-			color: #000;
-			font-size: 1.5rem;
-			margin-top: 30px;
+		#cat {
+			display: none;
+			margin-top: 50px;
+			width: 300px;
+			height: 300px;
+		}
+
+		#middle-finger {
+			display: none;
+			margin-top: 50px;
+			width: 300px;
+			height: 300px;
+		}
+
+		.win {
+			display: block;
+		}
+
+		.loss {
+			display: block;
 		}
 	</style>
 </head>
 <body>
-	<img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/FC_Shakhtar_Donetsk_logo.svg/1200px-FC_Shakhtar_Donetsk_logo.svg.png" alt="Шахтар">
-
 	<h1>Камінь, ножиці, папір</h1>
-
-	<p>Рахунок: </p>
-	<p id="score">Комп'ютер 0 : 0 Гравець</p>
-
-	<p>Оберіть свій варіант:</p>
-
-	<button onclick="play('камінь')">Камінь</button>
-	<button onclick="play('ножиці')">Ножиці</button>
-	<button onclick="play('папір')">Папір</button>
-
-	<p id="result"></p>
-
-	<script>
-		var computerScore = 0;
-		var playerScore = 0;
-
-		function play(playerChoice) {
-			var choices = ["камінь", "ножиці", "папір"];
-			var computerChoice = choices[Math.floor(Math.random()*choices.length)];
-			var result;
-			if (playerChoice == computerChoice) {
-				result = "Нічия!";
-			} else if (
-				(playerChoice == "камінь" && computerChoice == "ножиці") ||
-				(playerChoice == "ножиці" && computerChoice == "папір") ||
-				(playerChoice == "папір" && computerChoice == "камінь")
-			) {
-			
-                result = "Гравець переміг!";
-			playerScore++;
-		} else {
-			result = "Комп'ютер переміг!";
-			computerScore++;
-		}
-		document.getElementById("result").innerHTML = "Ви обрали " + playerChoice + ", комп'ютер обрав " + computerChoice + ". " + result;
-		document.getElementById("score").innerHTML = "Комп'ютер " + computerScore + " : " + playerScore + " Гравець";
-	}
-</script>
+	<div id="game">
+		<div id="player">
+			<div class="scoreboard">
+				<div class="score">Рахунок</div>
+				<div id="player-score" class="score">0</div>
+			</div>
+			<div id="choices">
+				<div class="choice" id="rock" onclick="play('rock')">Камінь</div>
+				<div class="choice" id="paper" onclick="play('paper')">Папір</div>
+                <div class="choice" id="scissors" onclick="play('scissors')">Ножиці</div>
+                </div>
+                </div>
+                <div id="computer">
+                <div class="scoreboard">
+                <div class="score">Рахунок</div>
+                <div id="computer-score" class="score">0</div>
+                </div>
+                <div id="choices">
+                <div class="choice" id="computer-rock"></div>
+                <div class="choice" id="computer-paper"></div>
+                <div class="choice" id="computer-scissors"></div>
+                </div>
+                </div>
+                </div>
+                <div id="result"></div>
+                <img id="cat" class="win" src="cat.png">
+                <img id="middle-finger" class="loss" src="middle-finger.jpg">
+                <script>
+                    var playerScore = 0;
+                    var computerScore = 0;
+                    var gamesPlayed = 0;
+                
+                    var playerScoreSpan = document.getElementById("player-score");
+                    var computerScoreSpan = document.getElementById("computer-score");
+                    var resultDiv = document.getElementById("result");
+                
+                    function play(playerChoice) {
+                        var choices = ["rock", "paper", "scissors"];
+                        var computerChoice = choices[Math.floor(Math.random() * 3)];
+                
+                        var playerChoiceDiv = document.getElementById(playerChoice);
+                        var computerChoiceDiv = document.getElementById("computer-" + computerChoice);
+                
+                        playerChoiceDiv.classList.add("selected");
+                        computerChoiceDiv.classList.add("selected");
+                
+                        setTimeout(function() {
+                            playerChoiceDiv.classList.remove("selected");
+                            computerChoiceDiv.classList.remove("selected");
+                        }, 500);
+                
+                        if (playerChoice === computerChoice) {
+                            resultDiv.innerHTML = "Нічия!";
+                        } else if ((playerChoice === "rock" && computerChoice === "scissors") ||
+                                    (playerChoice === "paper" && computerChoice === "rock") ||
+                                    (playerChoice === "scissors" && computerChoice === "paper")) {
+                            playerScore++;
+                            playerScoreSpan.innerHTML = playerScore;
+                            resultDiv.innerHTML = "Ви виграли!";
+                            gamesPlayed++;
+                            if (playerScore === 5) {
+                                resultDiv.innerHTML += " Ви перемогли у грі!";
+                                document.getElementById("cat").classList.add("win");
+                                document.getElementById("cat").style.display = "block";
+                                document.getElementById("middle-finger").style.display = "none";
+                            }
+                        } else {
+                            computerScore++;
+                            computerScoreSpan.innerHTML = computerScore;
+                            resultDiv.innerHTML = "Комп'ютер виграв!";
+                            gamesPlayed++;
+                            if (computerScore === 5) {
+                                resultDiv.innerHTML += " Комп'ютер переміг у грі!";
+                                document.getElementById("middle-finger").classList.add("loss");
+                                document.getElementById("middle-finger").style.display = "block";
+                                document.getElementById("cat").style.display = "none";
+                            }
+                        }
+                
+                        document.getElementById("games-played").innerHTML = gamesPlayed;
+                    }
+                </script>
+</body>
+</html>                
